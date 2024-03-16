@@ -1,0 +1,31 @@
+.row {
+    display: flex;
+    flex-wrap: wrap; /* Allow the rows to wrap if necessary */
+}
+
+.columnP {
+    flex: 1; /* Each column takes up equal space */
+    margin: 10px; /* Add margin for spacing between columns */
+}
+
+.columnP:first-child {
+    flex: 0 0 33.3%; /* First column takes up 33.3% width */
+}
+
+.bio, .currentCourses, .completedCourses {
+    border-radius: 25px;
+    border: 5px solid rgb(11, 91, 157);
+    background-color: white;
+    padding: 20px;
+    text-align: left;
+    flex-grow: 1; /* Ensure each content box takes up equal space vertically */
+    margin: 30px;
+}
+
+.completedCourses {
+    height: 80px; /* Adjust the height for the completed courses row */
+}
+
+.bio, .currentCourses {
+    height: 250px; /* Adjust the height for the bio and current courses rows */
+}

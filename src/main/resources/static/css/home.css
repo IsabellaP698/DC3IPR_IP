@@ -1,0 +1,117 @@
+@charset "UTF-8";
+
+body {
+	background-color: rgb(197, 229, 241);
+	margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Minimum height of the viewport */
+    display: flex;
+    flex-direction: column;
+	
+}
+
+main {
+    flex: 1; /* Fill remaining space in the viewport */
+}
+
+footer {
+    background-color: rgb(211, 245, 255);
+    color: dark blue; /* Example text color */
+    padding: 20px;
+    margin-top: auto; /* Push the footer to the bottom */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.logout {
+	position: absolute;
+    top: 25px;
+    right: 100px;
+}
+
+.logout a {
+  color: rgb(11, 91, 157);
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+}
+
+.arrow img{
+	position: absolute;
+    top: 14px;
+    right: 35px;
+    max-width: 5%;
+  max-height: 5%
+}
+
+.topnav-centered {
+	display: flex;
+    align-items: center; /* Align items vertically */
+    justify-content: flex-start; /* Align items from start */
+    justify-content: center; /* Center items horizontally */
+    
+	
+}
+
+.logo {
+    margin-right: 10px; /* Add margin between the logo and text */
+    max-width: 25%;
+  max-height: 25%;
+}
+
+.logo img {
+    width: 400px; /* Set the width of the logo */
+    height: auto; /* Let the height adjust proportionally */    
+}
+
+
+.topnav-centered p {
+  color: rgb(11, 91, 157);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  
+}
+
+header h1 {
+  color: rgb(11, 91, 157);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 60px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  text-align: center;
+}
+
+.column h3 {
+  color: rgb(11, 91, 157);
+  font-family: Arial, Helvetica, sans-serif;
+	
+}
+
+.column img {
+  	width: 200px; /* Set the width of the logo */
+    height: auto;
+}
+
+.newsBulletin, .suggestedCourses {
+  border-radius: 25px;
+  border: 5px solid rgb(11, 91, 157);
+  background-color: white;
+  padding: 20px; 
+  height: 150px; 
+  margin: 30px;
+  text-align: left;
+}
+
+.suggestedCourses h3 {
+	font-family: Arial, Helvetica, sans-serif;
+}
+

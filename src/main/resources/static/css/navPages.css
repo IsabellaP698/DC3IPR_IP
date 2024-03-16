@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+body {
+	background-color: rgb(197, 229, 241);
+	margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Minimum height of the viewport */
+    display: flex;
+    flex-direction: column;
+	
+}
+
+main {
+    flex: 1; /* Fill remaining space in the viewport */
+}
+
+footer {
+    background-color: rgb(211, 245, 255);
+    color: dark blue; /* Example text color */
+    padding: 20px;
+    margin-top: auto; /* Push the footer to the bottom */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.column {
+  float: left;
+  width: 33.3%;
+  justify-content: center; /* Add this line to horizontally center content */
+  align-items: center; /* Add this line to vertically center content */
+  
+}
+
+/* Clear floats after the columns */
+nav:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.spadelogo img {
+  max-width: 20%;
+  max-height: 20%
+}
+
+.CourRepo p {
+  margin-left: 100px; /* Adjust this value to position the text */
+  color: rgb(11, 91, 157);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 35px;
+  position: relative; /* Ensure the position is relative */
+  top: -100px; /* Adjust this value to move the text up or down */
+}
+
+.title {
+	color: rgb(11, 91, 157);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 55px;
+  text-align: center;
+}
+
+
+.topnav-right{
+	display: inline-flex;
+	align-content: flex-end;
+}
+
+.logout {
+}
+.logout a {
+  color: rgb(11, 91, 157);
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+}
+
+.arrow {
+	
+}
+
+
+.arrow img{
+    max-width: 50%;
+  max-height: 50%;
+}
+
+.changePageIcon img{
+	max-width: 90%;
+  max-height: 90%;
+}
+
