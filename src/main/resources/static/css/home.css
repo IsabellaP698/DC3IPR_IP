@@ -22,24 +22,12 @@ footer {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.logout {
-	position: absolute;
-    top: 25px;
-    right: 100px;
-}
-
-.logout a {
-  color: rgb(11, 91, 157);
-  font-family: Arial, Helvetica, sans-serif;
-  text-decoration: none;
-}
-
-.arrow img{
+#logout {
 	position: absolute;
     top: 14px;
     right: 35px;
-    max-width: 5%;
-  max-height: 5%
+        width: auto;
+    height: 60px;
 }
 
 .topnav-centered {
@@ -47,8 +35,6 @@ footer {
     align-items: center; /* Align items vertically */
     justify-content: flex-start; /* Align items from start */
     justify-content: center; /* Center items horizontally */
-    
-	
 }
 
 .logo {

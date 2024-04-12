@@ -9,12 +9,12 @@
 	<body>
 		<nav>
         <div class="column">
-            <div class="spadelogo">
-                <img src="img/spadeLogo.png">
-            </div>
-            <div class="CourRepo">
-                <p>Course Repository</p>
-            </div>
+        	<div class="topnav-left">
+        		<img class="spadelogo" src="img/spadeLogo.png">
+        		<div class="CourRepo">
+                	<p>Course Repository</p>
+            	</div>
+        	</div>
         </div>
 
         <div class="column">
@@ -28,12 +28,7 @@
             	<div class="changePageIcon">
                     <img src="<%= request.getAttribute("image") %>">
                 </div>
-                <div class="logout">
-                    <a href="log-out">Log Out</a>
-                </div>
-                <div class="arrow">
-                    <img src="img/logoutArrow.png">
-                </div>
+               <img id=logout src = "img/logout.png">
             </div>
         </div>
 		</nav>

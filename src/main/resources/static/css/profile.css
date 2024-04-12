@@ -1,3 +1,7 @@
+main {
+    flex: 1; /* Fill remaining space in the viewport */
+}
+
 .row {
     display: flex;
     flex-wrap: wrap; /* Allow the rows to wrap if necessary */

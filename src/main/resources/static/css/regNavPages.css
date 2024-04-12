@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+body {
+	background-color: rgb(197, 229, 241);
+	margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Minimum height of the viewport */
+    display: flex;
+    flex-direction: column;
+	
+}
+
+main {
+    flex: 1; /* Fill remaining space in the viewport */
+}
+
+
+.topnav-centered {
+	display: flex;
+    align-items: center; /* Align items vertically */
+    justify-content: flex-start; /* Align items from start */
+    justify-content: center; /* Center items horizontally */
+}
+
+.logo {
+    margin-right: 10px; /* Add margin between the logo and text */
+    max-width: 25%;
+  max-height: 25%;
+}
+
+.logo img {
+    width: 400px; /* Set the width of the logo */
+    height: auto; /* Let the height adjust proportionally */    
+}
+
+
+.topnav-centered p {
+  color: rgb(11, 91, 157);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  
+}
+
+

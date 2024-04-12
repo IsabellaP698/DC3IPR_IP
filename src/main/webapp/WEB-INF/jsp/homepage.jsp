@@ -17,12 +17,7 @@
 			</div>
 			
 			<div class="topnav-right">
-				<div class="logout">
-					<a href="log-out">Log Out</a>
-				</div>
-				<div class="arrow">
-					<img src = "img/logoutArrow.png">
-				</div>
+					<img id=logout src = "img/logout.png">
 			</div>
 			
 		</nav>

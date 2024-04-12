@@ -10,10 +10,6 @@ body {
 	
 }
 
-main {
-    flex: 1; /* Fill remaining space in the viewport */
-}
-
 footer {
     background-color: rgb(211, 245, 255);
     color: dark blue; /* Example text color */
@@ -37,53 +33,48 @@ nav:after {
   clear: both;
 }
 
-.spadelogo img {
-  max-width: 20%;
-  max-height: 20%
+.spadelogo {
+  max-width: 70px;
+    object-fit: contain;
 }
 
 .CourRepo p {
-  margin-left: 100px; /* Adjust this value to position the text */
   color: rgb(11, 91, 157);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 35px;
-  position: relative; /* Ensure the position is relative */
   top: -100px; /* Adjust this value to move the text up or down */
 }
 
 .title {
 	color: rgb(11, 91, 157);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 55px;
+  font-size: 45px;
   text-align: center;
 }
 
+.topnav-left{
+	display: flex;
+}
 
 .topnav-right{
-	display: inline-flex;
-	align-content: flex-end;
+	display: flex;
 }
 
-.logout {
-}
-.logout a {
-  color: rgb(11, 91, 157);
-  font-family: Arial, Helvetica, sans-serif;
-  text-decoration: none;
-}
-
-.arrow {
-	
-}
-
-
-.arrow img{
-    max-width: 50%;
-  max-height: 50%;
+#logout {
+	    padding-top: 20px;
+    width: auto;
+    height: 60px;
+    padding-right: 20px;
 }
 
 .changePageIcon img{
-	max-width: 90%;
+	max-width: 80px;
   max-height: 90%;
+  padding-top: 10px;
+}
+
+.changePageIcon {
+	margin-left: auto;
+	margin-right: 50px;
 }
 

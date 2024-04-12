@@ -7,7 +7,7 @@
 <link href="css/footer.css" rel="stylesheet">
 </head>
 <body>
-<footer>
+		<footer>
 	     	Confidential and for internal use only. Copyright ©2024. All rights reserved.
 		</footer>
 </body>
