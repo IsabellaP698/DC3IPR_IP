@@ -26,9 +26,14 @@
         <div class="column">
             <div class="topnav-right">
             	<div class="changePageIcon">
-                    <img src="<%= request.getAttribute("image") %>">
+            		<a href="<%= request.getAttribute("link") %>">
+            			<img src="<%= request.getAttribute("image") %>">
+            		</a>
+                    
                 </div>
-               <img id=logout src = "img/logout.png">
+                <a href="log-out">
+                	<img id=logout src = "img/logout.png">
+                </a>
             </div>
         </div>
 		</nav>

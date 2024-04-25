@@ -40,3 +40,68 @@ for (var i = 0; i < btns.length; i++) {
     this.className += " active";
   });
 }
+
+
+//getting courses
+
+
+var request;
+
+function requestDetails() {
+   request = new XMLHttpRequest();
+    request.open("GET", "showCourses", true);
+    request.send();
+    
+    request.onreadystatechange = function(){
+        processResponse();
+    }; 
+}
+
+function processResponse() {
+	
+    if (request.readyState == 4 && request.status == 200) {
+        console.log(request.responseXML);
+		var courses = request.responseXML.getElementsByTagName("courses")[0].getElementsByTagName("course"); // this is a double array
+		
+		console.log(courses);
+		var data="";
+		
+		for (i=0; i < courses.length; i++){
+			var data = data + "<div class='filterDiv " 
+					   + courses[i].getAttribute("company") + " "
+					   + courses[i].getAttribute("role1") + " "
+					   + courses[i].getAttribute("isCert") + " "
+					   + courses[i].getAttribute("location") + " "
+					   + courses[i].getAttribute("startDate") + " "
+					   + courses[i].getAttribute("deadline")
+					   + "'>" 
+					   + courses[i].getAttribute("name")
+					   + "</div";
+					   
+		}
+				console.log(data);
+		document.getElementsByClassName("container")[0].innerHTML = data;
+			
+		
+    }
+}
+
+// to search for courses
+function searchCourse() {
+  let input = document.getElementById('search').value
+  
+  request = new XMLHttpRequest();
+    request.open("POST", "searchForCourses", true);
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send("input=" + input);
+        
+    request.onreadystatechange = function(){
+        processResponse();
+    }; 
+}
+
+
+
+
+
+

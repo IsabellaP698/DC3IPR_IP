@@ -18,3 +18,9 @@
   background-color: #ddd;
   color: black;
 }
+
+a {
+	margin-top: auto;
+    margin-bottom: auto;
+    text-decoration: none;
+}

@@ -10,12 +10,13 @@
 	<body>
 		<% request.setAttribute("pageTitle", "Create/Edit a Course"); %>
 		<% request.setAttribute("image", "img/profileIcon.png"); %>
+		<% request.setAttribute("link", "profile"); %>
 		
         <jsp:include page="navPages.jsp" />
         
         <main>
         	<div class="formContainer">
-        		<form>
+        		<form action="courseCreation" method="POST">
     			<label for="cname">CourseName:</label>
     			<input type="text" id="cname" name="courseName" placeholder="Course Name...">
 
@@ -70,11 +71,11 @@
     			
     			<div class="approval">
     				<p for="approval">Required Approval:</p>
-  					<input type="checkbox" id="PM" name="PM" value="PM">
+  					<input type="checkbox" id="PM" name="PM" value="yes">
   					<label for="PM"> People Manager</label><br>
-  					<input type="checkbox" id="DA" name="DA" value="DA">
+  					<input type="checkbox" id="DA" name="DA" value="yes">
   					<label for="DA"> Delivery Area</label><br>
-  					<input type="checkbox" id="prac" name="prac" value="prac">
+  					<input type="checkbox" id="prac" name="prac" value="yes">
   					<label for="prac"> Practice</label>
     			</div>
     			

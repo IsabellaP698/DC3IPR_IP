@@ -10,13 +10,16 @@
 	
 		<% request.setAttribute("pageTitle", "Courses - Admin"); %>
 		<% request.setAttribute("image", "img/profileIcon.png"); %>
+		<% request.setAttribute("link", "profile"); %>
 		
         <jsp:include page="navPages.jsp" />
 		
 		<main>
-		
-			<button id="createCourse" type="button">Create a Course</button>
-		
+			
+			<a href=courseCreate>
+				<button id="createCourse" type="button">Create a Course</button>
+			</a>
+			
 			<jsp:include page="courseSearch.jsp"/>
 		
 		</main>

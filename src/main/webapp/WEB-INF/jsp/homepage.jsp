@@ -30,15 +30,24 @@
 		<main>
 			<div class="row">
 				<div class="column">
-					<img src = "img/profileIcon.png">
-					<h3>Profile</h3>
+					
+					<a href=profile>
+						<img src = "img/profileIcon.png">
+						<h3>Profile</h3>
+					</a>
+					
+					
 					<!-- button for profile -->
 				</div>
 		
 				<div class="column">
+				
+				<a href=courses>
 					<img src = "img/courseIcon.png">
 					<!-- button for courses -->
 					<h3>Courses</h3>
+				</a>
+					
 				</div>
 			</div>
 			

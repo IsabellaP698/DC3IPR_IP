@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,7 +15,20 @@
 		<h1 style="text-align: center">Login</h1>
 		
 		<div class="formContainer">
-			<form>
+		
+		<div id=error>
+							<%ArrayList<String> errors =  (ArrayList<String>)request.getAttribute("errors");
+								if(!errors.isEmpty()) {%>
+									<ul>
+								<%
+									for(String error: errors){%>
+					
+									<li><%=error%></li>
+								<%}%>
+							</ul>
+							<%}%>
+							</div>
+			<form action="login" method="POST">
 				<input type="text" id="email" name="email" placeholder="Email address">
 				<input type="text" id="pwd" name="pwd" placeholder="Password">
 				

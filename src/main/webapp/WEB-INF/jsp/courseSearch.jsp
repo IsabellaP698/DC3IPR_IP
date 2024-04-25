@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -6,10 +7,28 @@
 		<meta charset="UTF-8">
 		<link href="css/courseSearch.css" rel="stylesheet">
 		<script type="text/javascript" src="js/courseFilter.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
-	<body>
-       
+	<body onload="requestDetails()">
+	
+		<div id=error>
+							<%ArrayList<String> errors =  (ArrayList<String>)request.getAttribute("errors");
+								if(!errors.isEmpty()) {%>
+									<ul>
+								<%
+									for(String error: errors){%>
+					
+									<li><%=error%></li>
+								<%}%>
+							</ul>
+							<%}%>
+			</div>
 			
+			<div class="search-container">
+      			<input type="text" placeholder="Search.." id="search">
+      			<button onclick="searchCourse()" type="submit"><i class="fa fa-search"></i></button>
+  			</div>
+  			
 			<div class="filter">
 				<div id="myBtnContainer">
   					<button class="btn" onclick="filterSelection('all')"> All</button>
@@ -49,16 +68,16 @@
   					<div class="dropdown">
   					<button class="btn">Start Date</button>
   					<div class="dropdown-content">
-    					<button onclick="filterSelection('sdmay')"> May</button>
-    					<button onclick="filterSelection('sdjune')"> June</button>
+    					<button onclick="filterSelection('sdMay')"> May</button>
+    					<button onclick="filterSelection('sdJune')"> June</button>
   					</div>
   					</div>
   					
   					<div class="dropdown">
   					<button class="btn">Sign Up Deadline</button>
   					<div class="dropdown-content">
-    					<button onclick="filterSelection('sumarch')"> March</button>
-    					<button onclick="filterSelection('suapril')"> April</button>
+    					<button onclick="filterSelection('suMarch')"> March</button>
+    					<button onclick="filterSelection('suApril')"> April</button>
   					</div>
   					</div>
 				
@@ -80,10 +99,10 @@
   					<div class="filterDiv cert">Cert</div>
   					<div class="filterDiv virt">Virtual Course</div>
   					<div class="filterDiv inp">in person course</div>
-  					<div class="filterDiv sdmay">may course</div>
-  					<div class="filterDiv sdjune ">june course</div>
-  					<div class="filterDiv sumarch">march sign up</div>
-  					<div class="filterDiv suapril">april sign up</div>
+  					<div class="filterDiv sdMay">may course</div>
+  					<div class="filterDiv sdJune ">june course</div>
+  					<div class="filterDiv suMarch">march sign up</div>
+  					<div class="filterDiv suApril">april sign up</div>
 				</div>
 			
 			</div>

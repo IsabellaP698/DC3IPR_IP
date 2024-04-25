@@ -10,6 +10,7 @@
 	<body>
 		<% request.setAttribute("pageTitle", "Course Details"); %>
 		<% request.setAttribute("image", "img/profileIcon.png"); %>
+		<% request.setAttribute("link", "profile"); %>
 		
         <jsp:include page="navPages.jsp" />
         

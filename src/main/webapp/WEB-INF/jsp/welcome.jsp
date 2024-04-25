@@ -10,9 +10,13 @@
 	<body>
 		<jsp:include page="regNavPages.jsp" />
 		
-		<button id="register" type="button">Register</button>
+		<a href="register">
+			<button id="register" type="button">Register</button>
+		</a>
 		
-		<button id="login" type="button">Log In</button>
+		<a href="login">
+			<button id="login" type="button">Log In</button>
+		</a>
 
 		<jsp:include page="footer.jsp"/>
 	</body>
