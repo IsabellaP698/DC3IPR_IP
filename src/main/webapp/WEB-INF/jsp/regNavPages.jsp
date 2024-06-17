@@ -10,7 +10,10 @@
 		<nav class="navbar">
 			<div class="topnav-centered" style="text-align: center">
 				<div class="logo">
-					<img src = "img/caplogo.png">
+					<a href=homepage>
+						<img src = "img/caplogo.png">
+					</a>
+					
 				</div>
 				 <p>Course Repository</p>
 			</div>

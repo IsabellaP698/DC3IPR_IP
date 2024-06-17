@@ -176,6 +176,199 @@ public class CourseDAO extends JdbcDaoSupport{
 		}
 		return courses;
 	}
+	
+	
+public CourseEntity getCourseDetails(String courId) throws SQLException{
+		
+		Connection conn = null;
+	    PreparedStatement sql = null;
+	    ResultSet rs = null;
+	    CourseEntity c = new CourseEntity();
+		
+		try {
+			conn = dataSource.getConnection();
+			sql = conn.prepareStatement("SELECT * FROM COURSE WHERE ID = ?");
+			sql.setString(1, courId);
+			rs = sql.executeQuery();
+		
+			while (rs.next()) {
+				
+				c.setId(rs.getInt("id"));
+				c.setName(rs.getString("name"));
+				c.setType(rs.getString("type"));
+				c.setOrganiserName(rs.getString("organiser_name"));
+				c.setCourseDescription(rs.getString("course_description"));
+				c.setInternalFlag(rs.getString("internal_flag"));
+				c.setExternalFlag(rs.getString("external_flag"));
+				c.setVirtualFlag(rs.getString("virtual_flag"));
+				c.setInPersonFlag(rs.getString("in_person_flag"));
+				c.setStartDate(rs.getDate("start_date"));
+				c.setDeadline(rs.getDate("deadline"));
+				c.setPmApproval(rs.getString("pm_approval"));
+				c.setDaApproval(rs.getString("da_approval"));
+				c.setPracApproval(rs.getString("prac_approval"));
+				c.setDifficulty(rs.getInt("difficulty"));
+				c.setLength(rs.getInt("length_in_days"));
+				c.setIsCert(rs.getString("isCert"));
+			}
+		} finally {
+			if (rs != null) try { rs.close(); } catch (SQLException ignore) {}
+			if (sql != null) try { sql.close(); } catch (SQLException ignore) {}
+			if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
+		}
+		return c;
+	}
+
+public void editCourse(String editField,String editChange, String courId) throws Exception{
+	Connection conn = dataSource.getConnection();
+	PreparedStatement statement;
+	
+	if (editField.equals("courseDesc")) {
+		statement = conn.prepareStatement(
+				"UPDATE COURSE SET COURSE_DESCRIPTION = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+	} else if (editField.equals("courseName")) {
+		statement = conn.prepareStatement(
+				"UPDATE COURSE SET NAME = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+	} else if (editField.equals("type")) {
+		statement = conn.prepareStatement(
+				"UPDATE COURSE SET TYPE = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+	} else if (editField.equals("organiserName")) {
+		statement = conn.prepareStatement(
+				"UPDATE COURSE SET ORGANISER_NAME = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+	} else if (editField.equals("intFlag")) {
+		statement = conn.prepareStatement(
+				"UPDATE COURSE SET INTERNAL_FLAG = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+	} else if (editField.equals("extFlag")) {
+		statement = conn.prepareStatement(
+				"UPDATE COURSE SET EXTERNAL_FLAG = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+	} else if (editField.equals("virt")) {
+		statement = conn.prepareStatement(
+				"UPDATE COURSE SET VIRTUAL_FLAG = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+	} else if (editField.equals("intper")) {
+		statement = conn.prepareStatement(
+				"UPDATE COURSE SET IN_PERSON_FLAG = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+	} else if (editField.equals("startDate")) {
+		statement = conn.prepareStatement(
+				"UPDATE COURSE SET START_DATE = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+	} else if (editField.equals("signupDate")) {
+		statement = conn.prepareStatement(
+				"UPDATE COURSE SET DEADLINE = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+	} else if (editField.equals("pmapprov")) {
+		statement = conn.prepareStatement(
+				"UPDATE COURSE SET PM_APPROVAL = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+	} else if (editField.equals("daapprov")) {
+		statement = conn.prepareStatement(
+				"UPDATE COURSE SET DA_APPROVAL = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+	} else if (editField.equals("pracApprov")) {
+		statement = conn.prepareStatement(
+				"UPDATE COURSE SET PRAC_APPROVAL = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+	} else if (editField.equals("diff")) {
+		statement = conn.prepareStatement(
+				"UPDATE COURSE SET DIFFICULTY = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+	} else if (editField.equals("length")) {
+		statement = conn.prepareStatement(
+				"UPDATE COURSE SET LENGTH_IN_DAYS = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+	} else {
+		statement = conn.prepareStatement(
+				"UPDATE COURSE SET isCert = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+	}
+	
+	
+	try {
+        statement.setString(1, editChange);
+        statement.setString(2, courId);
+        
+        System.out.println(statement);
+        statement.executeUpdate();
+	} finally {
+        statement.close();
+        conn.close();
+	}
+}
+
+	public ArrayList<CourseEntity> getInterestedCourses(String empID) throws SQLException{
+		
+		Connection conn = null;
+	    PreparedStatement sql = null;
+	    ResultSet rs = null;
+		ArrayList<CourseEntity> courses = new ArrayList<CourseEntity>();
+		
+		try {
+			conn = dataSource.getConnection();
+			sql = conn.prepareStatement("SELECT name, deadline FROM COURSE WHERE deadline > SYSDATE() and id in (select course_id from course_Attendee where employee_id = ? and interested_flag = 'Y')");
+			sql.setString(1, empID);
+			rs = sql.executeQuery();
+		
+			while (rs.next()) {
+				CourseEntity c = new CourseEntity();
+				c.setName(rs.getString("name"));
+				c.setDeadline(rs.getDate("deadline"));
+				courses.add(c);
+			}
+		} finally {
+			if (rs != null) try { rs.close(); } catch (SQLException ignore) {}
+			if (sql != null) try { sql.close(); } catch (SQLException ignore) {}
+			if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
+		}
+		return courses;
+		
+	}
+	
+public ArrayList<CourseEntity> getSignedUpCourses(String empID) throws SQLException{
+		
+		Connection conn = null;
+	    PreparedStatement sql = null;
+	    ResultSet rs = null;
+		ArrayList<CourseEntity> courses = new ArrayList<CourseEntity>();
+		
+		try {
+			conn = dataSource.getConnection();
+			sql = conn.prepareStatement("SELECT name, start_date FROM COURSE WHERE start_date > SYSDATE() and id in (select course_id from course_Attendee where employee_id = ? and attending_flag = 'Y')");
+			sql.setString(1, empID);
+			rs = sql.executeQuery();
+		
+			while (rs.next()) {
+				CourseEntity c = new CourseEntity();
+				c.setName(rs.getString("name"));
+				c.setDeadline(rs.getDate("start_date"));
+				courses.add(c);
+			}
+		} finally {
+			if (rs != null) try { rs.close(); } catch (SQLException ignore) {}
+			if (sql != null) try { sql.close(); } catch (SQLException ignore) {}
+			if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
+		}
+		return courses;
+		
+	}
+
+public ArrayList<CourseEntity> getHistoricCourses(String empID) throws SQLException{
+	
+	Connection conn = null;
+    PreparedStatement sql = null;
+    ResultSet rs = null;
+	ArrayList<CourseEntity> courses = new ArrayList<CourseEntity>();
+	
+	try {
+		conn = dataSource.getConnection();
+		sql = conn.prepareStatement("SELECT name, start_date FROM COURSE WHERE start_date < SYSDATE() and id in (select course_id from course_Attendee where employee_id = ? and attending_flag = 'Y')");
+		sql.setString(1, empID);
+		rs = sql.executeQuery();
+	
+		while (rs.next()) {
+			CourseEntity c = new CourseEntity();
+			c.setName(rs.getString("name"));
+			c.setDeadline(rs.getDate("start_date"));
+			courses.add(c);
+		}
+	} finally {
+		if (rs != null) try { rs.close(); } catch (SQLException ignore) {}
+		if (sql != null) try { sql.close(); } catch (SQLException ignore) {}
+		if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
+	}
+	return courses;
+	
+}
 
 }
 	

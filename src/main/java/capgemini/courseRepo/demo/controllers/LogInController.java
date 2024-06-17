@@ -45,6 +45,10 @@ public class LogInController {
 				if (optEmpId != null) {
 					String userName = getEmployeeName(optEmpId);
 					String isAdmin = getifAdmin(optEmpId);
+					
+					//store emp id in session
+			         userSession.setEmployeeID(optEmpId);
+			         
 					if (isAdmin.equals("y")) {
 			        	userSession.setAdmin(true);
 			        } else {

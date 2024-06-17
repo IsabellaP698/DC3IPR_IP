@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import capgemini.courseRepo.demo.entities.CourseEntity;
+import capgemini.courseRepo.demo.entities.EmployeeEntity;
 import jakarta.annotation.PostConstruct;
 
 import java.sql.Connection;
@@ -66,7 +68,7 @@ public class EmployeeDAO extends JdbcDaoSupport {
 	
 	public String getifAdmin(Integer empId) throws Exception {
 		Connection conn = dataSource.getConnection();
-		PreparedStatement sql = conn.prepareStatement("select isAdmin from employee where id = ?");
+		PreparedStatement sql = conn.prepareStatement("select isAdmin, name from employee where id = ?");
 		sql.setInt(1, empId);
 		ResultSet rs = sql.executeQuery();
 		try {
@@ -101,6 +103,24 @@ public class EmployeeDAO extends JdbcDaoSupport {
 
 	}
 	
+	public Integer getEmployeeIdFromEmail(String email) throws Exception {
+		Connection conn = dataSource.getConnection();
+		PreparedStatement sql = conn.prepareStatement("select id from employee where email = ?");
+		sql.setString(1, email);
+		ResultSet rs = sql.executeQuery();
+		try {
+			if (!rs.next()) {
+				throw new Exception("Could not find id for employee with email = " + email);
+			} else {
+				return rs.getInt("id");
+			}
+		} finally {
+			sql.close();
+			conn.close();
+		}
+
+	}
+	
 	public boolean doesEmployeeAlreadyExist(String email) throws Exception {
 		Connection conn = dataSource.getConnection();
         PreparedStatement statement = conn.prepareStatement("select count(id) from employee where email = ?");
@@ -111,5 +131,64 @@ public class EmployeeDAO extends JdbcDaoSupport {
         statement.close();
         conn.close();
         return alreadyExist;
+	}
+	
+	public EmployeeEntity getBioInfo(String empID) throws SQLException {
+		
+		Connection conn = null;
+	    PreparedStatement sql = null;
+	    ResultSet rs = null;
+	    EmployeeEntity e = new EmployeeEntity();
+	    
+	    try {
+			conn = dataSource.getConnection();
+			sql = conn.prepareStatement("SELECT * FROM EMPLOYEE WHERE ID = ?");
+			sql.setString(1, empID);
+			rs = sql.executeQuery();
+		
+			while (rs.next()) {
+				
+				e.setName(rs.getString("name"));
+				e.setEmail(rs.getString("email"));
+				e.setRole(rs.getString("role"));
+				
+				if(rs.getString("isAdmin").contains("y")) {
+					e.setAdmin("TRUE");
+				} else {
+					e.setAdmin("FALSE");
+				}
+				
+				if(rs.getString("pref1") != null) {
+					e.setPref1(rs.getString("pref1"));
+				}
+				
+				if(rs.getString("pref2") != null) {
+					e.setPref2(rs.getString("pref2"));
+				}
+				
+				if(rs.getString("pref3") != null) {
+					e.setPref3(rs.getString("pref3"));
+				}
+				
+				if(rs.getString("pref4") != null) {
+					e.setPref4(rs.getString("pref4"));
+				}
+				
+				if(rs.getString("pref5") != null) {
+					e.setPref5(rs.getString("pref5"));
+				}
+				
+				System.out.println(rs.getString("pref1"));
+				System.out.println(rs.getString("pref2"));
+				System.out.println(rs.getString("pref3"));
+				
+			}
+		} finally {
+			if (rs != null) try { rs.close(); } catch (SQLException ignore) {}
+			if (sql != null) try { sql.close(); } catch (SQLException ignore) {}
+			if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
+		}
+		return e;
+		
 	}
 }

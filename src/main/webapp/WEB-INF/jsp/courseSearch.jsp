@@ -11,6 +11,16 @@
 	</head>
 	<body onload="requestDetails()">
 	
+	<div id=confMessage>
+							<%String message =  (String)request.getAttribute("confMessage");
+								if(!message.isEmpty() || message != null) {%>
+									<ul>
+				
+									<li><%=message%></li>
+								<%}%>
+							</ul>
+			</div>
+	
 		<div id=error>
 							<%ArrayList<String> errors =  (ArrayList<String>)request.getAttribute("errors");
 								if(!errors.isEmpty()) {%>

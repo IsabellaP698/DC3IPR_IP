@@ -111,12 +111,67 @@ public class GetCoursesFromDBController {
 	}
 	
 	
+	
+	
+	@RequestMapping(value= {"/getCourseDetailsForPage"}, method=RequestMethod.POST)
+	protected String getCourseDetailsForPage(HttpServletResponse response, 
+									  @ModelAttribute("userSession") UserSession userSession,
+									  @RequestParam(value = "courId", required = false) String courId,
+									  Model model) throws Exception {
+		
+		response.setContentType("application/xml;charset=UTF-8");
+	    PrintWriter out = response.getWriter();
+	    
+	    //get all courses from database
+	    String course = getCourseDetails(courId);
+	    //for each courses
+	    try {
+	    	try {
+	    		if (course != null) {
+	    			//print out xml <courses> </courses>
+	    			out.println("<courses>");
+	    			
+	    			out.println(course);
+	    			
+	    			out.println("</courses>");
+	    		} else {
+	    			out.println("courses return isnt working");
+	    		}
+	    	} finally {
+	    		out.close();
+	    	}
+	    } catch (Exception e) {
+//	    	List<String> errors = new ArrayList<>();
+//	    	errors.add("There are no courses matching your search input");
+//	    	model.addAttribute("errors", errors);
+//	    	if (userSession.isAdmin()) {
+//				return "coursesAdmin";
+//			} else {
+//				
+//			}
+//			return "courses";
+	    }
+	    
+	     
+		if (userSession.isAdmin()) {
+			return "courseDetailsAdmin";
+		} else {
+			
+		}
+		return "courseDetails";
+	}
+	
+	
 	public ArrayList<String> returnAllCourses() throws SQLException{
 		return courseService.returnAllCourses();
 	}
 	
 	public ArrayList<String> returnSearchedCourses(String searchInput) throws SQLException{
 		return courseService.returnSearchedCourses(searchInput);
+	}
+	
+	public String getCourseDetails(String courId) throws SQLException{
+		return courseService.getCourseDetails(courId);
 	}
 	
 	

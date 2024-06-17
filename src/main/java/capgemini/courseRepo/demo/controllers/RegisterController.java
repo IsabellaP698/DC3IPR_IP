@@ -60,6 +60,10 @@ public class RegisterController {
         String role = formData.get("role");
         String pref1 = formData.get("type1");
          employeeService.addNewEmployee(fullname, email, password, isAdmin, role, pref1 );
+         
+         //store emp id in session
+         int id = employeeService.getEmployeeId(email, password);
+         userSession.setEmployeeID(id);
         
         if (isAdmin.equals("y")) {
         	userSession.setAdmin(true);

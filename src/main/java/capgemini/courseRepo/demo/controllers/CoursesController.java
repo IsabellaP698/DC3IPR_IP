@@ -16,7 +16,8 @@ public class CoursesController {
 	
 	@RequestMapping(value= {"/courses"}, method=RequestMethod.GET)
 	protected String getCourses(@ModelAttribute("errors") ArrayList<String> vlist,
-								@ModelAttribute("userSession") UserSession userSession) throws Exception {
+								@ModelAttribute("userSession") UserSession userSession,
+								@ModelAttribute("confMessage") String message) throws Exception {
 		
 		if (userSession.isAdmin()) {
 			return "coursesAdmin";

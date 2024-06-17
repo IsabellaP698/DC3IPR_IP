@@ -9,12 +9,17 @@
 	<body>
 		<nav>
         <div class="column">
+        <a href=home>
         	<div class="topnav-left">
         		<img class="spadelogo" src="img/spadeLogo.png">
+        		
         		<div class="CourRepo">
                 	<p>Course Repository</p>
             	</div>
+        		
+        		
         	</div>
+        	</a>
         </div>
 
         <div class="column">

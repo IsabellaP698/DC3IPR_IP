@@ -24,6 +24,7 @@ main {
     text-align: left;
     flex-grow: 1; /* Ensure each content box takes up equal space vertically */
     margin: 30px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .completedCourses {

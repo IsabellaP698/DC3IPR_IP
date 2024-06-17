@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Create/Edit Course</title>
+		<title>Create Course</title>
 		<link href="css/courseCreate.css" rel="stylesheet">
 	</head>
 	<body>

@@ -4,10 +4,11 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Course Details - Admin</title>
+		<title>View Course Details - Admin</title>
 		<link href="css/courseDetailsAdmin.css" rel="stylesheet">
+		<script type="text/javascript" src="js/courseDetailsAdmin.js"></script>
 	</head>
-	<body>
+	<body onload="getCourseIdAndDetails()">
 		<% request.setAttribute("pageTitle", "Course Details - Admin"); %>
 		<% request.setAttribute("image", "img/profileIcon.png"); %>
 		<% request.setAttribute("link", "profile"); %>
@@ -16,15 +17,12 @@
         <main>
         	<div class="Acolumn">
         		<div class="row">
-        			<!-- edit course -->
-        			<div class="container">
-        				<button id="editCourse" type="button">Edit Course</button>
-        			</div>
-        		</div>
-        		<div class="row">
         			<!-- view details -->
         			<div class="container">
-        				<button id="viewDetails" type="button">View Course Details</button>
+        				<a href=outerCourseDetailsAdmin>
+        					<button id="viewDetails" type="button">View Course Details</button>
+        				</a>
+        				
         			</div>
         		</div> 
         	

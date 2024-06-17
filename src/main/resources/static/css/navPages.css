@@ -45,6 +45,10 @@ nav:after {
   top: -100px; /* Adjust this value to move the text up or down */
 }
 
+.column a {
+	text-decoration: none;
+}
+
 .title {
 	color: rgb(11, 91, 157);
   font-family: Arial, Helvetica, sans-serif;

@@ -67,7 +67,9 @@ function processResponse() {
 		var data="";
 		
 		for (i=0; i < courses.length; i++){
-			var data = data + "<div class='filterDiv " 
+			 data += "<a href=outerCourseDetails onclick='addIdToSession(" + courses[i].getAttribute("id") + ")'>"
+					   + "<div class='filterDiv " 
+					   + courses[i].getAttribute("id") + " "
 					   + courses[i].getAttribute("company") + " "
 					   + courses[i].getAttribute("role1") + " "
 					   + courses[i].getAttribute("isCert") + " "
@@ -76,7 +78,8 @@ function processResponse() {
 					   + courses[i].getAttribute("deadline")
 					   + "'>" 
 					   + courses[i].getAttribute("name")
-					   + "</div";
+					   + "</div>"
+					   + "</a>";
 					   
 		}
 				console.log(data);
@@ -100,7 +103,11 @@ function searchCourse() {
     }; 
 }
 
-
+function addIdToSession(id){
+	try {
+		window.sessionStorage.setItem("id", id);  } catch (e) {
+  }
+}
 
 
 

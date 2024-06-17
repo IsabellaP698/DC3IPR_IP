@@ -111,12 +111,113 @@ public class CourseService {
 		return cXML;
 	}
 	
+	public ArrayList<String> getInterestedCourses(String id) throws SQLException {
+		ArrayList<CourseEntity> intCourses = coursedao.getInterestedCourses(id);
+		ArrayList<String> cXML= new ArrayList<String>();
+		
+		for(CourseEntity c : intCourses) {
+			String sXML = new String();
+			
+			sXML = "<course name='" + c.getName();
+			sXML += "' deadline='" + c.getDeadline();
+			sXML += "' />";
+			cXML.add(sXML);
+		}
+		
+		return cXML;
+	}
+	
+	public ArrayList<String> getSignedUpCourses(String id) throws SQLException {
+		ArrayList<CourseEntity> intCourses = coursedao.getSignedUpCourses(id);
+		ArrayList<String> cXML= new ArrayList<String>();
+		
+		for(CourseEntity c : intCourses) {
+			String sXML = new String();
+			
+			sXML = "<course name='" + c.getName();
+			sXML += "' startDate='" + c.getDeadline();
+			sXML += "' />";
+			cXML.add(sXML);
+		}
+		
+		return cXML;
+	}
+	
+	public ArrayList<String> getHistoricCourses(String id) throws SQLException {
+		ArrayList<CourseEntity> intCourses = coursedao.getHistoricCourses(id);
+		ArrayList<String> cXML= new ArrayList<String>();
+		
+		for(CourseEntity c : intCourses) {
+			String sXML = new String();
+			
+			sXML = "<course name='" + c.getName();
+			sXML += "' startDate='" + c.getDeadline();
+			sXML += "' />";
+			cXML.add(sXML);
+		}
+		
+		return cXML;
+	}
+	
 	public ArrayList<String> returnAllCourses() throws SQLException{
 		return returnCoursesToController(coursedao.returnAllCourses());
 	}
 	
 	public ArrayList<String> returnSearchedCourses(String input) throws SQLException{
 		return returnCoursesToController(coursedao.returnSearchedCourses(input));
+	}
+	
+	public String getCourseDetails(String courId) throws SQLException{
+		CourseEntity c = coursedao.getCourseDetails(courId);
+		String cXML = new String();
+		
+		cXML = "<course id='" + c.getId() 
+		+ "' name='" + c.getName() 
+		+ "' type='" + c.getType()
+		+ "' orgName='" + c.getOrganiserName()
+		+ "' desc='" + c.getCourseDescription()
+		+ "' startDate='" + c.getStartDate()
+		+ "' deadline='" + c.getDeadline()
+		+ "' diff='" + c.getDifficulty()
+		+ "' length='" + c.getLength()
+		+ "' pmApprov='" + c.getPmApproval()
+		+ "' daApprov='" + c.getDaApproval()
+		+ "' pracApprov='" + c.getPracApproval()
+		;
+		
+	
+	if (c.getInternalFlag().contains("Y")) {
+		cXML += "' company='" + "Internal";
+	}
+	
+	if (c.getExternalFlag().contains("Y")) {
+		cXML += "' company='" + "External";
+	}
+	
+	if ((c.getIsCert().contains("Y"))) {
+		cXML += "' isCert='" + "Y";
+	} else {
+		cXML += "' isCert='" + "N";
+	}
+	
+	if (c.getVirtualFlag().contains("Y")) {
+		cXML += "' location='" + "Virtual";
+	}
+	
+	if (c.getInPersonFlag().contains("Y")) {
+		cXML += "' location='" + "In-Person";
+	}
+
+		
+	cXML += "' />";
+		
+		
+		return cXML;
+	}
+	
+	public void editCourse(String editField, String editChange, String courID) throws Exception {
+		
+		coursedao.editCourse(editField, editChange, courID );
 	}
 		
 		

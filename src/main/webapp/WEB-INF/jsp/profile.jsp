@@ -6,9 +6,10 @@
 		<meta charset="UTF-8">
 		<title>Profile</title>
 		<link href="css/profile.css" rel="stylesheet">
+		<script type="text/javascript" src="js/profilePage.js"></script>
 		
 	</head>
-	<body>
+	<body onload="loadProfilePage()">
 		<% request.setAttribute("pageTitle", "Profile"); %>
 		<% request.setAttribute("image", "img/courseIcon.png"); %>
 		<% request.setAttribute("link", "courses"); %>

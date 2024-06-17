@@ -11,6 +11,49 @@ main {
   
 }
 
+.column1 {
+  float: left;
+  width: 50%;
+  justify-content: center; /* Add this line to horizontally center content */
+  align-items: center; /* Add this line to vertically center content */
+  
+}
+
+.formEditContainer {
+	display:none;
+	font-family: Arial, Helvetica, sans-serif;
+	    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #f2f2f2;
+}
+
+.formEditContainer select, .formEditContainer input[type=text]{
+	width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+.formEditContainer input[type=submit] {
+    width: 100%;
+    background-color: rgb(37, 95, 167);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
 .row {
     display: flex;
     flex-wrap: wrap; /* Allow the rows to wrap if necessary */
@@ -36,7 +79,7 @@ main {
   margin: auto;  
 }
 
-#registerInt:hover, #signUp:hover {
+#registerInt:hover, #signUp:hover, #courseDetailsAdmin {
   background-color: #ddd;
   color: black;
 }
@@ -59,9 +102,89 @@ main {
     flex-grow: 1; /* Ensure each content box takes up equal space vertically */
     margin: 30px;
     height: 250px;
-   
+    font-family: Arial, Helvetica, sans-serif;
+   overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .comments {
 	height: 150px;
+}
+
+.dot {
+	max-width: 30px;
+}
+
+
+
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  border: 3px solid #f1f1f1;
+  position: fixed;
+}
+
+/* Add styles to the form container */
+.register-form-container, .signup-form-container {
+  padding: 10px;
+  background-color: white;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 350px;
+}
+
+/* Add a red background color to the cancel button */
+.cancel {
+  background-color: red;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Set a style for the submit/login button */
+.btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* When the inputs get focus, do something */
+.register-form-container input[type=text]:focus, .signup-form-container input[type=text]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Full-width input fields */
+.register-form-container input[type=text], .signup-form-container input[type=text]{
+    width: 100%;
+    padding-top: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+    padding-bottom: 15px;
+}
+
+#courseDetailsAdmin, #editCourse {
+    display: block;
+    width: 60%;
+    border: none;
+    background-color: rgb(37, 95, 167);
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 25px;
+    margin: auto;
+    margin-bottom: 30px;
 }

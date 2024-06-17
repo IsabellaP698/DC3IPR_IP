@@ -1,9 +1,14 @@
 package capgemini.courseRepo.demo.services;
 
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Month;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import capgemini.courseRepo.demo.daos.EmployeeDAO;
+import capgemini.courseRepo.demo.entities.EmployeeEntity;
 
 //Service classes are decorated with the @Service annotation in Spring.
 @Service
@@ -37,6 +42,54 @@ public class EmployeeService {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public Integer getEmployeeIdFromEmail(String email) {
+		try {
+			return employeeDAO.getEmployeeIdFromEmail(email);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public String getBioInfo(String empId) throws SQLException {
+		EmployeeEntity emp = employeeDAO.getBioInfo(empId);
+		String sXML = new String();
+		
+		sXML += "<bio name='" + emp.getName(); 
+		sXML += "' email='" + emp.getEmail();
+		sXML += "' isAdmin='" + emp.isAdmin();
+		
+		if (emp.getRole().contains("sm")) {
+			sXML += "' role='Scrum Master";
+		}
+		
+		if (emp.getPref1() != null) {
+			sXML += "' pref1='" + emp.getPref1();
+		}
+		
+		if (emp.getPref2() != null) {
+			sXML += "' pref2='" + emp.getPref2();
+		}
+		
+		if (emp.getPref3() != null) {
+			sXML += "' pref3='" + emp.getPref3();
+		}
+		
+		if (emp.getPref4() != null) {
+			sXML += "' pref4='" + emp.getPref4();
+		}
+		
+		if (emp.getPref5() != null) {
+			sXML += "' pref5='" + emp.getPref5();
+		}
+		
+		sXML += "' />";
+			
+		
+		return sXML;
 	}
 
 }

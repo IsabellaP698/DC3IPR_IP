@@ -1,5 +1,6 @@
 package capgemini.courseRepo.demo.controllers;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -30,7 +31,10 @@ public class CourseCreateController {
 	}
 	
 	@RequestMapping(value= {"/courseCreation"}, method=RequestMethod.POST)
-	protected String submitCourseCreate(@RequestParam Map<String, String> formData, @ModelAttribute("userSession") UserSession userSession) throws Exception {
+	protected String submitCourseCreate(@ModelAttribute("confMessage") String message, 
+										@ModelAttribute("errors") ArrayList<String> vlist, 
+										@RequestParam Map<String, String> formData,
+									    @ModelAttribute("userSession") UserSession userSession) throws Exception {
 		createCourse(formData);
 		
 		if (userSession.isAdmin()) {

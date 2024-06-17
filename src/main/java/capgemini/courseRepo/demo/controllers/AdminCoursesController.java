@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class AdminCoursesController {
 	@RequestMapping(value= {"/coursesAdmin"}, method=RequestMethod.GET)
-	protected String getCoursesAdmin(@ModelAttribute("errors") ArrayList<String> vlist) throws Exception {
+	protected String getCoursesAdmin(@ModelAttribute("errors") ArrayList<String> vlist,
+			@ModelAttribute("confMessage") String message) throws Exception {
 		return "coursesAdmin";
 	}
 
