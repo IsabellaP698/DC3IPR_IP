@@ -48,6 +48,21 @@ public class CourseService {
 									  pracApprov );
 	}
 	
+	public int createUserMadeCourse(String courseName,
+		    				String type, 
+		    				String desc,
+		    				String isCert,  
+		    				String startDate,
+		    				String empId
+		    ) throws Exception{
+			return coursedao.createUserMadeCourse(courseName, 
+					  type, 
+					  desc, 
+					  isCert,
+					  startDate,
+					  empId );
+}
+	
 	public ArrayList<String> returnCoursesToController(ArrayList<CourseEntity> list){
 		ArrayList<String> cXML= new ArrayList<String>();
 		
@@ -74,10 +89,12 @@ public class CourseService {
 				sXML += "' role1='" + "se sm";
 			}
 			
-			if ((c.getIsCert().contains("Y"))) {
-				sXML += "' isCert='" + "cert";
+			if ((c.getIsCert() != null) && (c.getIsCert().contains("Y"))) {
+				sXML += "' isCert='" + "Y";
+			} else if ((c.getIsCert() != null) && (c.getIsCert().contains("N"))) {
+				sXML += "' isCert='" + "N";
 			} else {
-				sXML += "' isCert='" + "nocert";
+				sXML += "' isCert= null'";
 			}
 			
 			if (c.getVirtualFlag().contains("Y")) {
@@ -135,7 +152,41 @@ public class CourseService {
 			String sXML = new String();
 			
 			sXML = "<course name='" + c.getName();
-			sXML += "' startDate='" + c.getDeadline();
+			sXML += "' startDate='" + c.getStartDate();
+			sXML += "' />";
+			cXML.add(sXML);
+		}
+		
+		return cXML;
+	}
+	
+	public ArrayList<String> getSuggestedCourses(String id) throws SQLException {
+		ArrayList<CourseEntity> suggCourses = coursedao.getSuggestedCourses(id);
+		ArrayList<String> cXML= new ArrayList<String>();
+		
+		for(CourseEntity c : suggCourses) {
+			String sXML = new String();
+			
+			sXML = "<course name='" + c.getName();
+			sXML += "' startDate='" + c.getStartDate();
+			sXML += "' id='" + c.getId();
+			sXML += "' />";
+			cXML.add(sXML);
+		}
+		
+		return cXML;
+	}
+	
+	public ArrayList<String> getNewsBulletinCourses() throws SQLException {
+		ArrayList<CourseEntity> newsCourses = coursedao.getNewsBulletinCourses();
+		ArrayList<String> cXML= new ArrayList<String>();
+		
+		for(CourseEntity c : newsCourses) {
+			String sXML = new String();
+			
+			sXML = "<course name='" + c.getName();
+			sXML += "' startDate='" + c.getStartDate();
+			sXML += "' id='" + c.getId();
 			sXML += "' />";
 			cXML.add(sXML);
 		}
@@ -152,6 +203,33 @@ public class CourseService {
 			
 			sXML = "<course name='" + c.getName();
 			sXML += "' startDate='" + c.getDeadline();
+			sXML += "' />";
+			cXML.add(sXML);
+		}
+		
+		return cXML;
+	}
+	
+	public ArrayList<String> getUserMadeHistoricCourses(String id) throws SQLException {
+		ArrayList<CourseEntity> userMadeCourses = coursedao.getUserMadeHistoricCourses(id);
+		ArrayList<String> cXML= new ArrayList<String>();
+		
+		for(CourseEntity c : userMadeCourses) {
+			String sXML = new String();
+			
+			sXML = "<course name='" + c.getName();
+			sXML += "' type='" + c.getType();
+			sXML += "' desc='" + c.getCourseDescription();
+			sXML += "' startDate='" + c.getStartDate();
+			
+			if ((c.getIsCert() != null) && (c.getIsCert().contains("Y"))) {
+				sXML += "' isCert='" + "Y";
+			} else if ((c.getIsCert() != null) && (c.getIsCert().contains("N"))) {
+				sXML += "' isCert='" + "N";
+			} else {
+				sXML += "' isCert= null'";
+			}
+			
 			sXML += "' />";
 			cXML.add(sXML);
 		}
@@ -194,10 +272,12 @@ public class CourseService {
 		cXML += "' company='" + "External";
 	}
 	
-	if ((c.getIsCert().contains("Y"))) {
+	if ((c.getIsCert() != null) && (c.getIsCert().contains("Y"))) {
 		cXML += "' isCert='" + "Y";
-	} else {
+	} else if ((c.getIsCert() != null) && (c.getIsCert().contains("N"))) {
 		cXML += "' isCert='" + "N";
+	} else {
+		cXML += "' isCert= null'";
 	}
 	
 	if (c.getVirtualFlag().contains("Y")) {

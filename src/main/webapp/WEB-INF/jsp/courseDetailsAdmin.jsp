@@ -31,11 +31,13 @@
         		<div class="row">
         			<!-- view who has registered interest in a course -->
         			<div class="regIntPeeps">
+        				<h3>Registered Interest Attendees</h3>
         			</div>
         		</div>
         		<div class="row">
         			<!-- view who has booked a course -->
         			<div class="bookedPeeps">
+        				<h3>Signed Up Attendees</h3>
         			</div>
         		</div>
         	</div>

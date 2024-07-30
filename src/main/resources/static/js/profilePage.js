@@ -3,6 +3,7 @@ function loadProfilePage() {
 	displayInterestedCourses();
 	displaySignedUpCourses();
 	displayHistoricCourses();
+	displayUserMadeHistoricCourses();
 }
 
 function displayHistoricCourses(){
@@ -32,6 +33,40 @@ function processHistoricResponse() {
 					   
 		}
 		document.getElementsByClassName("completedCourses")[0].innerHTML += histCoursesData;
+			
+		
+    }
+}
+
+function displayUserMadeHistoricCourses(){
+	UserMadeHistoricrequest = new XMLHttpRequest();
+    UserMadeHistoricrequest.open("GET", "getUserMadeHistoricCourses", true);
+    UserMadeHistoricrequest.send();
+    
+    UserMadeHistoricrequest.onreadystatechange = function(){
+        processUserMadeHistoricResponse();
+    }; 
+}
+
+function processUserMadeHistoricResponse() {
+	
+    if (UserMadeHistoricrequest.readyState == 4 && UserMadeHistoricrequest.status == 200) {
+        console.log(UserMadeHistoricrequest.responseXML);
+		var courses = UserMadeHistoricrequest.responseXML.getElementsByTagName("courses")[0].getElementsByTagName("course"); // this is a double array
+		
+		console.log(courses);
+		var userMadeHistCoursesData="<strong>Historic Courses Completed Before Registery: </strong>";
+		
+		for (i=0; i < courses.length; i++){
+			 userMadeHistCoursesData += "<br>"
+			  				+ "Name: " + courses[i].getAttribute("name") 
+							+ " Type: " + courses[i].getAttribute("type") 
+							+ " Desc: " + courses[i].getAttribute("type") 
+							+ " Start Date: " + courses[i].getAttribute("startDate") 
+							+ " Is Cert?: " + courses[i].getAttribute("isCert");
+					   
+		}
+		document.getElementsByClassName("userMadeCourses")[0].innerHTML += userMadeHistCoursesData;
 			
 		
     }

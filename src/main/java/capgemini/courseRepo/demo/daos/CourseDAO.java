@@ -45,8 +45,8 @@ public class CourseDAO extends JdbcDaoSupport{
 		Connection conn = dataSource.getConnection();
 		PreparedStatement statement = conn.prepareStatement(
 				"INSERT INTO COURSE (name, type, organiser_name, course_description, internal_flag, external_flag, "
-				+ "virtual_flag, in_person_flag, start_date, deadline, pm_approval, da_approval, prac_approval, difficulty, length_in_days, isCert) "
-				+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+				+ "virtual_flag, in_person_flag, start_date, deadline, pm_approval, da_approval, prac_approval, difficulty, length_in_days, isCert, created_date) "
+				+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE())", Statement.RETURN_GENERATED_KEYS);
 		try {
 	        statement.setString(1, courseName);
 	        statement.setString(2, type);
@@ -82,6 +82,41 @@ public class CourseDAO extends JdbcDaoSupport{
 	        } else {
 	        	statement.setString(16, "N");
 	        }
+	        
+	        statement.executeUpdate();
+	        ResultSet generatedKeys = statement.getGeneratedKeys();
+	        generatedKeys.next();
+	        return generatedKeys.getInt(1);
+		} finally {
+	        statement.close();
+	        conn.close();
+		}
+	}
+	
+	public int createUserMadeCourse(String courseName,
+							String type, 
+							String desc,
+							String isCert,  
+							String startDate,
+							String empId
+		    ) throws Exception{
+		Connection conn = dataSource.getConnection();
+		PreparedStatement statement = conn.prepareStatement(
+				"INSERT INTO usermade_hist_course (name, type, course_description, start_date, isCert,madeById ) "
+				+ "values (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+		try {
+	        statement.setString(1, courseName);
+	        statement.setString(2, type);
+	        statement.setString(3, desc);
+	        statement.setString(4, startDate);
+	        
+	        if (isCert.equals("yes")) {
+	        	statement.setString(5, "Y");
+	        } else {
+	        	statement.setString(5, "N");
+	        }
+	        
+	        statement.setString(6, empId);
 	        
 	        statement.executeUpdate();
 	        ResultSet generatedKeys = statement.getGeneratedKeys();
@@ -342,6 +377,77 @@ public ArrayList<CourseEntity> getSignedUpCourses(String empID) throws SQLExcept
 		
 	}
 
+public ArrayList<CourseEntity> getSuggestedCourses(String empID) throws SQLException{
+	
+	System.out.println(empID);
+	
+	Connection conn = null;
+    PreparedStatement sql = null;
+    ResultSet rs = null;
+	ArrayList<CourseEntity> courses = new ArrayList<CourseEntity>();
+	
+	try {
+		conn = dataSource.getConnection();
+		sql = conn.prepareStatement("select c.id, c.name, c.start_date "
+									+ "from employee e"
+									+ " join course c"
+									+ " on e.pref1 = c.type"
+									+ " left outer join course_attendee a"
+									+ " on a.employee_id = e.id"
+									+ " and a.course_id = c.id"
+									+ " where e.id = ?"
+									+ " and a.employee_id is null;");
+		sql.setString(1, empID);
+		System.out.println(sql);
+		rs = sql.executeQuery();
+	
+		while (rs.next()) {
+			CourseEntity c = new CourseEntity();
+			c.setId(rs.getInt("id"));
+			c.setName(rs.getString("name"));
+			c.setStartDate(rs.getDate("start_date"));
+			courses.add(c);
+		}
+	} finally {
+		if (rs != null) try { rs.close(); } catch (SQLException ignore) {}
+		if (sql != null) try { sql.close(); } catch (SQLException ignore) {}
+		if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
+	}
+	return courses;
+	
+}
+
+public ArrayList<CourseEntity> getNewsBulletinCourses() throws SQLException{
+	
+	Connection conn = null;
+    PreparedStatement sql = null;
+    ResultSet rs = null;
+	ArrayList<CourseEntity> courses = new ArrayList<CourseEntity>();
+	
+	try {
+		conn = dataSource.getConnection();
+		sql = conn.prepareStatement("select c.id, c.name, c.start_date "
+									+ "from course c"
+									+ " where c.created_date >= DATE(NOW() - INTERVAL 7 DAY);");
+		System.out.println(sql);
+		rs = sql.executeQuery();
+	
+		while (rs.next()) {
+			CourseEntity c = new CourseEntity();
+			c.setId(rs.getInt("id"));
+			c.setName(rs.getString("name"));
+			c.setStartDate(rs.getDate("start_date"));
+			courses.add(c);
+		}
+	} finally {
+		if (rs != null) try { rs.close(); } catch (SQLException ignore) {}
+		if (sql != null) try { sql.close(); } catch (SQLException ignore) {}
+		if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
+	}
+	return courses;
+	
+}
+
 public ArrayList<CourseEntity> getHistoricCourses(String empID) throws SQLException{
 	
 	Connection conn = null;
@@ -359,6 +465,37 @@ public ArrayList<CourseEntity> getHistoricCourses(String empID) throws SQLExcept
 			CourseEntity c = new CourseEntity();
 			c.setName(rs.getString("name"));
 			c.setDeadline(rs.getDate("start_date"));
+			courses.add(c);
+		}
+	} finally {
+		if (rs != null) try { rs.close(); } catch (SQLException ignore) {}
+		if (sql != null) try { sql.close(); } catch (SQLException ignore) {}
+		if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
+	}
+	return courses;
+	
+}
+
+public ArrayList<CourseEntity> getUserMadeHistoricCourses(String empID) throws SQLException{
+	
+	Connection conn = null;
+    PreparedStatement sql = null;
+    ResultSet rs = null;
+	ArrayList<CourseEntity> courses = new ArrayList<CourseEntity>();
+	
+	try {
+		conn = dataSource.getConnection();
+		sql = conn.prepareStatement("SELECT * FROM usermade_hist_course WHERE madeById = ? ");
+		sql.setString(1, empID);
+		rs = sql.executeQuery();
+	
+		while (rs.next()) {
+			CourseEntity c = new CourseEntity();
+			c.setName(rs.getString("name"));
+			c.setType(rs.getString("type"));
+			c.setCourseDescription(rs.getString("course_description"));
+			c.setStartDate(rs.getDate("start_date"));
+			c.setIsCert(rs.getString("isCert"));
 			courses.add(c);
 		}
 	} finally {

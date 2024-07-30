@@ -55,3 +55,8 @@ main {
     margin: 30px;
     height: 250px;
 }  
+
+.regIntPeeps h3, .bookedPeeps h3 {
+	font-family: Arial, Helvetica, sans-serif;
+	    color: rgb(11, 91, 157);
+}

@@ -40,7 +40,7 @@ function processResponse1() {
 			signUpData += namesSignUps[i].getAttribute("name");
 		}
 		
-		document.getElementsByClassName("bookedPeeps")[0].innerHTML = signUpData;
+		document.getElementsByClassName("bookedPeeps")[0].innerHTML += signUpData;
 	}
 }
 
@@ -59,7 +59,7 @@ function processResponse2() {
 			interestedData += namesInts[i].getAttribute("name");
 		}
 		
-		document.getElementsByClassName("regIntPeeps")[0].innerHTML = interestedData;
+		document.getElementsByClassName("regIntPeeps")[0].innerHTML += interestedData;
 	}
 }
 

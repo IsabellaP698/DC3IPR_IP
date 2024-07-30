@@ -6,6 +6,7 @@
 		<meta charset="UTF-8">
 		<title>Create Course</title>
 		<link href="css/courseCreate.css" rel="stylesheet">
+    
 	</head>
 	<body>
 		<% request.setAttribute("pageTitle", "Create/Edit a Course"); %>
@@ -18,7 +19,7 @@
         	<div class="formContainer">
         		<form action="courseCreation" method="POST">
     			<label for="cname">CourseName:</label>
-    			<input type="text" id="cname" name="courseName" placeholder="Course Name...">
+    			<input type="text" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));" id="cname" name="courseName" placeholder="Course Name...">
 
     			<label for="type">Type:</label>
     			<select id="type" name="type">
@@ -28,7 +29,7 @@
     			</select>
     			
     			<label for="organiserName">Organiser Name:</label>
-    			<input type="text" id="organiserName" name="organiserName" placeholder="Organiser Name...">
+    			<input type="text" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));" id="organiserName" name="organiserName" placeholder="Organiser Name...">
     			
     			<label for="intEnt">Internal or External:</label>
     			<select id="intEnt" name="intEnt">
@@ -43,7 +44,9 @@
     			</select>
     			
     			<label for="desc">Course Description:</label>
-				<textarea rows "5" cols "60" name="desc"></textarea>   
+    			<br>
+				<textarea onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));" rows "5" cols "60" name="desc"></textarea>   
+				<br>
 				
 				<label for="length">Course length (in days):</label>
     			<input type="number" id="length" name="length" placeholder="Course Length...">

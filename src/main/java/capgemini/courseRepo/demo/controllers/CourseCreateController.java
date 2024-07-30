@@ -30,6 +30,11 @@ public class CourseCreateController {
 		return "courseCreate";
 	}
 	
+	@RequestMapping(value= {"/userMadeCourseCreate"}, method=RequestMethod.GET)
+	protected String getUserMadeCourseCreate() throws Exception {
+		return "userMadeCourseCreate";
+	}
+	
 	@RequestMapping(value= {"/courseCreation"}, method=RequestMethod.POST)
 	protected String submitCourseCreate(@ModelAttribute("confMessage") String message, 
 										@ModelAttribute("errors") ArrayList<String> vlist, 
@@ -75,6 +80,33 @@ public class CourseCreateController {
 								   pmApprov,
 								   daApprov,
 								   pracApprov
+								   );
+	}
+	
+	@RequestMapping(value= {"/userMadeCourseCreation"}, method=RequestMethod.POST)
+	protected String submitUserMadeCourseCreate(@ModelAttribute("confMessage") String message, 
+										@ModelAttribute("errors") ArrayList<String> vlist, 
+										@RequestParam Map<String, String> formData,
+									    @ModelAttribute("userSession") UserSession userSession) throws Exception {
+		createUserMadeCourse(formData, String.valueOf(userSession.getEmployeeID()));
+		
+		
+		return "profile";
+	}
+	
+	private void createUserMadeCourse(Map<String, String> formData, String empId) throws Exception {
+		String courseName = formData.get("courseName");
+		String type = formData.get("type");
+		String desc = formData.get("desc");
+		String isCert = formData.get("cert");
+		String startDate = formData.get("startDate");
+		
+		 courseService.createUserMadeCourse(courseName, 
+								   type, 
+								   desc, 
+								   isCert,
+								   startDate,
+								   empId
 								   );
 	}
 	

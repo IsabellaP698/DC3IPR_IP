@@ -79,7 +79,7 @@ main {
   margin: auto;  
 }
 
-#registerInt:hover, #signUp:hover, #courseDetailsAdmin {
+#registerInt:hover, #signUp:hover, #courseDetailsAdmin:hover {
   background-color: #ddd;
   color: black;
 }

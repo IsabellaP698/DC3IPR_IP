@@ -29,7 +29,7 @@
 							<%}%>
 							</div>
 			<form action="/register" method="POST">
-				<input type="text" id="fullname" name="fullname" placeholder="Full name">
+				<input type="text" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));" id="fullname" name="fullname" placeholder="Full name">
 				<input type="text" id="email" name="email" placeholder="Email address">
 				<input type="text" id="pwd" name="pwd" placeholder="Password">
 				<select id="isAdmin" name="isAdmin">

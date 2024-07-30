@@ -44,9 +44,6 @@ for (var i = 0; i < btns.length; i++) {
 
 //getting courses
 
-
-var request;
-
 function requestDetails() {
    request = new XMLHttpRequest();
     request.open("GET", "showCourses", true);
@@ -93,14 +90,46 @@ function processResponse() {
 function searchCourse() {
   let input = document.getElementById('search').value
   
-  request = new XMLHttpRequest();
-    request.open("POST", "searchForCourses", true);
-    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    request.send("input=" + input);
+  searchRequest = new XMLHttpRequest();
+    searchRequest.open("POST", "searchForCourses", true);
+    searchRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    searchRequest.send("input=" + input);
         
-    request.onreadystatechange = function(){
-        processResponse();
+    searchRequest.onreadystatechange = function(){
+        processSearchResponse();
     }; 
+}
+
+function processSearchResponse() {
+	
+    if (searchRequest.readyState == 4 && searchRequest.status == 200) {
+        console.log(searchRequest.responseXML);
+		var courses = searchRequest.responseXML.getElementsByTagName("courses")[0].getElementsByTagName("course"); // this is a double array
+		
+		console.log(courses);
+		var data="";
+		
+		for (i=0; i < courses.length; i++){
+			 data += "<a href=outerCourseDetails onclick='addIdToSession(" + courses[i].getAttribute("id") + ")'>"
+					   + "<div class='filterDiv " 
+					   + courses[i].getAttribute("id") + " "
+					   + courses[i].getAttribute("company") + " "
+					   + courses[i].getAttribute("role1") + " "
+					   + courses[i].getAttribute("isCert") + " "
+					   + courses[i].getAttribute("location") + " "
+					   + courses[i].getAttribute("startDate") + " "
+					   + courses[i].getAttribute("deadline")
+					   + "'>" 
+					   + courses[i].getAttribute("name")
+					   + "</div>"
+					   + "</a>";
+					   
+		}
+				console.log(data);
+		document.getElementsByClassName("container")[0].innerHTML = data;
+			
+		
+    }
 }
 
 function addIdToSession(id){

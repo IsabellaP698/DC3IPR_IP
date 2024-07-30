@@ -17,6 +17,10 @@
         <jsp:include page="navPages.jsp" />
 		<main>
 		
+			<a href=userMadeCourseCreate>
+					<button id="userMadeCourseCreateBtn" type="button">Create Historic Course</button>
+			</a>
+		
 		
 			<div class="row">
 			
@@ -40,6 +44,13 @@
 			<!-- Completed courses -->
 			<div class="row">
 				<div class="completedCourses">
+					
+				</div>
+			</div>
+			
+			<!-- User made historic courses -->
+			<div class="row">
+				<div class="userMadeCourses">
 					
 				</div>
 			</div>

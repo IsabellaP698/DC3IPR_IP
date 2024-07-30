@@ -115,6 +115,34 @@ public class ProfileController {
 		return "profile";
 	}
 	
+	@RequestMapping(value= {"/getUserMadeHistoricCourses"}, method=RequestMethod.GET)
+	protected String getUserMadeHistoricCourses(HttpServletResponse response, 
+									  @ModelAttribute("userSession") UserSession userSession) throws Exception {
+		
+		response.setContentType("application/xml;charset=UTF-8");
+	    PrintWriter out = response.getWriter();
+	    
+	    //get all courses from database
+	    ArrayList<String> courses = courseService.getUserMadeHistoricCourses(String.valueOf(userSession.getEmployeeID()));
+	    //for each courses
+	    try {
+	         if (courses != null) {
+	        	//print out xml <courses> </courses>
+	        	 out.println("<courses>");
+	        	 for (String s : courses) {
+	        		 out.println(s);
+	        	 }
+	        	 out.println("</courses>");
+	         } else {
+	        	 out.println("courses return isnt working");
+	         }
+	     } finally {
+	         out.close();
+	     }
+	    
+		return "profile";
+	}
+	
 	@RequestMapping(value= {"/getBioInfo"}, method=RequestMethod.GET)
 	protected String getBioInfo(HttpServletResponse response, 
 									  @ModelAttribute("userSession") UserSession userSession) throws Exception {

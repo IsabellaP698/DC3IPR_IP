@@ -6,8 +6,9 @@
 		<meta charset="UTF-8">
 		<title>Home</title>
 		<link href="css/home.css" rel="stylesheet">
+		<script type="text/javascript" src="js/homePage.js"></script>
 	</head>
-	<body>
+	<body onload="loadHomePage()">
 		<nav class="navbar">
 			<div class="topnav-centered" style="text-align: center">
 				<div class="logo">
