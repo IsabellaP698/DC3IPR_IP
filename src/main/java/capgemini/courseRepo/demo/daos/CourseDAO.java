@@ -507,5 +507,41 @@ public ArrayList<CourseEntity> getUserMadeHistoricCourses(String empID) throws S
 	
 }
 
+public String getCourseName(String courID) throws Exception {
+	Connection conn = dataSource.getConnection();
+	PreparedStatement sql = conn.prepareStatement("select name from course where id = ?");
+	sql.setString(1, courID);
+	ResultSet rs = sql.executeQuery();
+	try {
+		if (!rs.next()) {
+			throw new Exception("Could not find name for course with ID = " + courID);
+		} else {
+			return rs.getString("name");
+		}
+	} finally {
+		sql.close();
+		conn.close();
+	}
+
+}
+
+public String getOrganiserEmail(String courID) throws Exception {
+	Connection conn = dataSource.getConnection();
+	PreparedStatement sql = conn.prepareStatement("select organiser_email from course where id = ?");
+	sql.setString(1, courID);
+	ResultSet rs = sql.executeQuery();
+	try {
+		if (!rs.next()) {
+			throw new Exception("Could not find email for course with ID = " + courID);
+		} else {
+			return rs.getString("organiser_email");
+		}
+	} finally {
+		sql.close();
+		conn.close();
+	}
+
+}
+
 }
 	

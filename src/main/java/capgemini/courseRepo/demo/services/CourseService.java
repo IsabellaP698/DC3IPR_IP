@@ -299,6 +299,14 @@ public class CourseService {
 		
 		coursedao.editCourse(editField, editChange, courID );
 	}
+	
+	public String getCourseName(String courID) throws Exception {
+		return coursedao.getCourseName(courID);
+	}
+	
+	public String getOrganiserEmail(String courID) throws Exception {
+		return coursedao.getOrganiserEmail(courID);
+	}
 		
 		
 }

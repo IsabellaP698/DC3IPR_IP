@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import capgemini.courseRepo.demo.models.UserSession;
 import capgemini.courseRepo.demo.services.AttendeeService;
+import capgemini.courseRepo.demo.services.CourseService;
+import capgemini.courseRepo.demo.services.EmailService;
 import capgemini.courseRepo.demo.services.EmployeeService;
 
 
@@ -27,6 +29,12 @@ public class CourseDetailsController {
 	
 	@Autowired(required=false)
 	EmployeeService employeeService;
+	
+	@Autowired(required=false)
+	CourseService courseService;
+	
+	@Autowired(required=false)
+	EmailService emailService;
 	
 	@RequestMapping(value= {"/outerCourseDetails"}, method=RequestMethod.GET)
 	protected String getCourseDetails(@ModelAttribute("errors") ArrayList<String> vlist, @ModelAttribute("userSession") UserSession userSession) throws Exception {
@@ -78,6 +86,29 @@ public class CourseDetailsController {
 		String confMessage = "You have successfully registered interest for a course!";
 		model.addAttribute("confMessage", confMessage);
 		
+		//send email to organiser
+		String courseName = courseService.getCourseName(courID);
+		String organiserEmail = courseService.getOrganiserEmail(courID);
+				
+		emailService.sendRegIntEmail(organiserEmail, "New Person has Registered Interest",courseName );
+		
+		//send emails to approvers
+		if (formData.get("pracEmail") != null) {
+			String pracEmail = formData.get("email");
+			emailService.sendApprovalEmail(pracEmail, "Someone needs your practice approval",courseName, email );
+		}
+		
+		if (formData.get("pmEmail") != null) {
+			String pracEmail = formData.get("email");
+			emailService.sendApprovalEmail(pracEmail, "Someone needs your people manager approval",courseName, email );
+		}
+		
+		if (formData.get("daEmail") != null) {
+			String pracEmail = formData.get("email");
+			emailService.sendApprovalEmail(pracEmail, "Someone needs your delivery area approval",courseName, email );
+		}
+		
+		
 		if (userSession.isAdmin()) {
 			return "coursesAdmin";
 		}
@@ -119,6 +150,12 @@ public class CourseDetailsController {
 		
 		String confMessage = "You have successfully signed up to a course!";
 		model.addAttribute("confMessage", confMessage);
+		
+		//send email to organiser
+		String courseName = courseService.getCourseName(courID);
+		String organiserEmail = courseService.getOrganiserEmail(courID);
+		
+		emailService.sendSignUpEmail(organiserEmail, "New Sign Up",courseName );
 		
 		if (userSession.isAdmin()) {
 			return "coursesAdmin";
