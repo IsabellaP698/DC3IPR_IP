@@ -154,3 +154,35 @@ function closeEditForm() {
 	}
 }
 
+
+function changeInputType() {
+   // Get the select element and the input element
+   var select = document.getElementById("field");
+   var input = document.getElementById("edit");
+
+   // Change the input type based on the selected option
+   
+   if (select.value == "courseName" || select.value == "organiserName" || select.value == "type" || select.value == "courseDesc") {
+   		input.type = "text";
+   }
+   else if (select.value == "startDate" || select.value == "signupDate") {
+   		input.type = "date";
+   }
+   else if (select.value == "length" || select.value == "diff") {
+   		input.type = "number";
+   }
+   else if (select.value == "intFlag" || select.value == "extFlag" || select.value == "virt" || select.value == "intper" || select.value == "pmapprov" || select.value == "daapprov" || select.value == "pracApprov" || select.value == "cert") {
+   		input.type = "text";
+   		input.maxlength = "1";
+   		input.pattern = "[YN]";
+   } else {
+	input.type = "text";
+}
+   
+}
+
+
+
+
+
+

@@ -26,7 +26,6 @@
 							<%}%>
 							</div>
 							
-        	<div class="row">
         		<!-- course basic info -->
         		<div class="columnD">
         			<div class="basicInfo">
@@ -55,9 +54,6 @@
   										
     										<h1>Sign Up</h1>
 
-    										<label for="email"><b>Email</b></label>
-    										<input type="text" placeholder=" Enter Email" name="email" required>
-
  						 			</form>
 								</div>
         					</div>
@@ -74,9 +70,6 @@
   										
     										<h1>Register Interest</h1>
 
-    										<label for="email"><b>Email</b></label>
-    										<input type="text" placeholder=" Enter Email" name="email" required>
-
     										
  						 			</form>
 								</div>
@@ -85,14 +78,7 @@
         			</div>
         			
         		</div>
-        	</div>
         	
-        	<!-- add review/comment -->
-        	<div class="row">
-        		<div class="comments">
-        		
-        		</div>
-        	</div>
         	
         </main>
 

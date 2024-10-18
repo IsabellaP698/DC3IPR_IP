@@ -258,10 +258,26 @@ public class CourseService {
 		+ "' deadline='" + c.getDeadline()
 		+ "' diff='" + c.getDifficulty()
 		+ "' length='" + c.getLength()
-		+ "' pmApprov='" + c.getPmApproval()
-		+ "' daApprov='" + c.getDaApproval()
-		+ "' pracApprov='" + c.getPracApproval()
 		;
+		
+		
+		if (c.getPmApproval() == null) {
+			cXML += "' pmApprov='" + "N/A";
+		} else {
+			cXML += "' pmApprov='" + c.getPmApproval();
+		}
+		
+		if (c.getDaApproval() == null) {
+			cXML += "' daApprov='" + "N/A";
+		} else {
+			cXML += "' daApprov='" + c.getDaApproval();
+		}
+		
+		if (c.getPracApproval() == null) {
+			cXML += "' pracApprov='" + "N/A";
+		} else {
+			cXML += "' pracApprov='" + c.getPracApproval();
+		}
 		
 	
 	if (c.getInternalFlag().contains("Y")) {

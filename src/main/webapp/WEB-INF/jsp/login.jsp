@@ -12,6 +12,10 @@
 	<body>
 		<jsp:include page="regNavPages.jsp" />
 		
+		<a href="welcome">
+			<img id=backArrow src = "img/backArrow.png">
+		</a>	
+			
 		<h1 style="text-align: center">Login</h1>
 		
 		<div class="formContainer">

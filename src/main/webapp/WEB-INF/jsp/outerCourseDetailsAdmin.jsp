@@ -14,6 +14,10 @@
 		
         <jsp:include page="navPages.jsp" />
         
+        <a href="courses">
+			<img id=backArrow src = "img/backArrow.png">
+		</a>
+        
         <main>
         
         	<div class="row">
@@ -35,7 +39,7 @@
         			<div class="formEditContainer">
         				<form class="form" action="courseEdit" method="POST">
         				<label for="field">Field to Change:</label>
-    					<select id="field" name="field">
+    					<select id="field" name="field" onchange="changeInputType()">
       						<option value="courseName">Course Name</option>
       						<option value="type">Type</option>
       						<option value="organiserName">Organiser Name</option>

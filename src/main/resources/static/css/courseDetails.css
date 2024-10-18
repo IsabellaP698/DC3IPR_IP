@@ -188,3 +188,10 @@ main {
     margin: auto;
     margin-bottom: 30px;
 }
+
+#backArrow {
+    width: 60px;
+    height: 60px;
+    padding-left: 40px;
+    top: 45; /* Adjust this value to move the arrow higher or lower */
+}

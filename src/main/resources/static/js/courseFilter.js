@@ -81,7 +81,9 @@ function processResponse() {
 		}
 				console.log(data);
 		document.getElementsByClassName("container")[0].innerHTML = data;
-			
+		
+		filterSelection("all")
+					
 		
     }
 }
@@ -127,7 +129,8 @@ function processSearchResponse() {
 		}
 				console.log(data);
 		document.getElementsByClassName("container")[0].innerHTML = data;
-			
+		
+		filterSelection("all")
 		
     }
 }

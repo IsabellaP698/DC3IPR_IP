@@ -18,7 +18,7 @@
         	<div class="formContainer">
         		<form action="userMadeCourseCreation" method="POST">
     			<label for="cname">CourseName:</label>
-    			<input type="text" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));" id="cname" name="courseName" placeholder="Course Name...">
+    			<input type="text" maxlength="50" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));" id="cname" name="courseName" placeholder="Course Name...">
 
     			<label for="type">Type:</label>
     			<select id="type" name="type">
@@ -39,7 +39,7 @@
     			</select>
     			
     			<label for="startDate">Start Date:</label>
-    			<input type="date" id="startDate" name="startDate" placeholder="Start Date...">
+    			<input type="date" id="startDate" name="startDate" placeholder="Completion Date..." max="">
 
     			
   
@@ -51,6 +51,12 @@
         </main>
         
         <jsp:include page="footer.jsp"/>
+        
+         <script>
+       	 	// Set today's date as the minimum date
+       	 	const today = new Date().toISOString().split('T')[0];
+        	document.getElementById('startDate').setAttribute('max', today);
+    	</script>
 
 	</body>
 </html>

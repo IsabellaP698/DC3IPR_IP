@@ -14,6 +14,10 @@
 		
         <jsp:include page="navPages.jsp" />
         
+        <a href="courses">
+			<img id=backArrow src = "img/backArrow.png">
+		</a>
+        
         <main>
 			
 			<jsp:include page="courseDetails.jsp"/>

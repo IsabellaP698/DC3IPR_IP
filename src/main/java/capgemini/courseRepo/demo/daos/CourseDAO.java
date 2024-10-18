@@ -270,18 +270,46 @@ public void editCourse(String editField,String editChange, String courId) throws
 	} else if (editField.equals("organiserName")) {
 		statement = conn.prepareStatement(
 				"UPDATE COURSE SET ORGANISER_NAME = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+		
 	} else if (editField.equals("intFlag")) {
-		statement = conn.prepareStatement(
-				"UPDATE COURSE SET INTERNAL_FLAG = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+		if (editChange.equals("Y")) {
+			statement = conn.prepareStatement(
+					"UPDATE COURSE SET INTERNAL_FLAG = ? , EXTERNAL_FLAG = 'N' WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+		} else {
+			statement = conn.prepareStatement(
+					"UPDATE COURSE SET INTERNAL_FLAG = ? , EXTERNAL_FLAG = 'Y' WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+		}
+		
 	} else if (editField.equals("extFlag")) {
-		statement = conn.prepareStatement(
-				"UPDATE COURSE SET EXTERNAL_FLAG = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+		if (editChange.equals("Y")) {
+			statement = conn.prepareStatement(
+					"UPDATE COURSE SET INTERNAL_FLAG = 'N' , EXTERNAL_FLAG = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+		} else {
+			statement = conn.prepareStatement(
+					"UPDATE COURSE SET INTERNAL_FLAG = 'Y' , EXTERNAL_FLAG = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+		}
+		
+		
 	} else if (editField.equals("virt")) {
-		statement = conn.prepareStatement(
-				"UPDATE COURSE SET VIRTUAL_FLAG = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+		if (editChange.equals("Y")) {
+			statement = conn.prepareStatement(
+					"UPDATE COURSE SET VIRTUAL_FLAG = ?, IN_PERSON_FLAG = 'N' WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+		} else {
+			statement = conn.prepareStatement(
+					"UPDATE COURSE SET VIRTUAL_FLAG = ?, IN_PERSON_FLAG = 'Y' WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+		}
+		
 	} else if (editField.equals("intper")) {
-		statement = conn.prepareStatement(
-				"UPDATE COURSE SET IN_PERSON_FLAG = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+		if (editChange.equals("Y")) {
+			statement = conn.prepareStatement(
+					"UPDATE COURSE SET VIRTUAL_FLAG = 'N', IN_PERSON_FLAG = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+		} else {
+			statement = conn.prepareStatement(
+					"UPDATE COURSE SET VIRTUAL_FLAG = 'Y', IN_PERSON_FLAG = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);
+		}
+	
+	
+	
 	} else if (editField.equals("startDate")) {
 		statement = conn.prepareStatement(
 				"UPDATE COURSE SET START_DATE = ? WHERE ID = ?", Statement.RETURN_GENERATED_KEYS);

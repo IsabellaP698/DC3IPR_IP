@@ -109,7 +109,7 @@ public class RegisterController {
         if (isAdmin.length() == 0) {
             errors.add("You must say if you are an admin");
         }
-        if (role.length() == 0) {
+        if (role == null) {
             errors.add("You must provide your role");
         }
         if (pref1.length() == 0) {

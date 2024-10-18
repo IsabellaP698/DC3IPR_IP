@@ -19,7 +19,7 @@
         	<div class="formContainer">
         		<form action="courseCreation" method="POST">
     			<label for="cname">CourseName:</label>
-    			<input type="text" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));" id="cname" name="courseName" placeholder="Course Name...">
+    			<input type="text" maxlength="50" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));" id="cname" name="courseName" placeholder="Course Name...">
 
     			<label for="type">Type:</label>
     			<select id="type" name="type">
@@ -45,7 +45,7 @@
     			
     			<label for="desc">Course Description:</label>
     			<br>
-				<textarea onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));" rows "5" cols "60" name="desc"></textarea>   
+				<textarea maxlength="100" onkeypress="return ((event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.charCode == 8 || event.charCode == 32 || (event.charCode >= 48 && event.charCode <= 57));" rows "5" cols "60" name="desc"></textarea>   
 				<br>
 				
 				<label for="length">Course length (in days):</label>
@@ -67,10 +67,10 @@
     			</select>
     			
     			<label for="startDate">Start Date:</label>
-    			<input type="date" id="startDate" name="startDate" placeholder="Start Date...">
+    			<input type="date" id="startDate" name="startDate" placeholder="Start Date..." min="">
     			
     			<label for="deadline">Sign Up Deadline:</label>
-    			<input type="date" id="deadline" name="deadline" placeholder="Deadline...">
+    			<input type="date" id="deadline" name="deadline" placeholder="Deadline..." min="">
     			
     			<div class="approval">
     				<p for="approval">Required Approval:</p>
@@ -91,6 +91,14 @@
         </main>
         
         <jsp:include page="footer.jsp"/>
+        
+        <script>
+       	 	// Set today's date as the minimum date
+       	 	const today = new Date().toISOString().split('T')[0];
+        	document.getElementById('startDate').setAttribute('min', today);
+        	
+        	document.getElementById('deadline').setAttribute('min', today);
+    	</script>
 
 	</body>
 </html>

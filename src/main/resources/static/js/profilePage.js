@@ -62,7 +62,7 @@ function processUserMadeHistoricResponse() {
 			  				+ "Name: " + courses[i].getAttribute("name") 
 							+ " Type: " + courses[i].getAttribute("type") 
 							+ " Desc: " + courses[i].getAttribute("type") 
-							+ " Start Date: " + courses[i].getAttribute("startDate") 
+							+ " Completion Date: " + courses[i].getAttribute("startDate") 
 							+ " Is Cert?: " + courses[i].getAttribute("isCert");
 					   
 		}
@@ -165,7 +165,7 @@ function processBioResponse() {
 							
 			if (users[i].getAttribute("pref1") != null){
 				bioData +="<br>";
-				bioData += "Preference 1: " + users[i].getAttribute("pref1");
+				bioData += "Preference: " + users[i].getAttribute("pref1");
 			}
 			if (users[i].getAttribute("pref2") != null){
 				bioData +="<br>";

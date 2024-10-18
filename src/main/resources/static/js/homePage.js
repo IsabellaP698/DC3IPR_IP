@@ -63,7 +63,6 @@ function processSuggestedResponse() {
 			 suggestedCoursesData += "<br>"
 			 				+ "<a href=outerCourseDetails onclick='addIdToSession("+ scourses[i].getAttribute("id") + ")'>" 
 			  				+ "Name: " + scourses[i].getAttribute("name")
-							+ " Start Date: " + scourses[i].getAttribute("startDate")
 							+ "</a>";
 					   
 		}

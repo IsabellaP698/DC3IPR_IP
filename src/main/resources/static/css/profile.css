@@ -29,6 +29,7 @@ main {
 
 .completedCourses, .userMadeCourses {
     height: 80px; /* Adjust the height for the completed courses row */
+    overflow-y: auto;
 }
 
 .bio, .currentCourses {

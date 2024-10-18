@@ -54,6 +54,16 @@ public class EmployeeService {
 		return null;
 	}
 	
+	public String getEmployeeEmailFromId(String id) {
+		try {
+			return employeeDAO.getEmployeeEmailFromId(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public String getBioInfo(String empId) throws SQLException {
 		EmployeeEntity emp = employeeDAO.getBioInfo(empId);
 		String sXML = new String();
@@ -62,12 +72,24 @@ public class EmployeeService {
 		sXML += "' email='" + emp.getEmail();
 		sXML += "' isAdmin='" + emp.isAdmin();
 		
-		if (emp.getRole().contains("sm")) {
+		if (emp.getRole().contains("Scrum Master")) {
 			sXML += "' role='Scrum Master";
+		} else if (emp.getRole().contains("Software Engineer")) {
+			sXML += "' role='Software Engineer";
+		} else {
+			sXML += "' role='N/A";
 		}
 		
 		if (emp.getPref1() != null) {
-			sXML += "' pref1='" + emp.getPref1();
+			if (emp.getPref1().contains("aws")) {
+				sXML += "' pref1='AWS";
+			}
+			if (emp.getPref1().contains("azure")) {
+				sXML += "' pref1='Azure";
+			}
+			if (emp.getPref1().contains("softSkills")) {
+				sXML += "' pref1='Soft Skills";
+			}
 		}
 		
 		if (emp.getPref2() != null) {
@@ -91,5 +113,5 @@ public class EmployeeService {
 		
 		return sXML;
 	}
-
+	
 }

@@ -103,6 +103,24 @@ public class EmployeeDAO extends JdbcDaoSupport {
 
 	}
 	
+	public String getEmployeeEmailFromId(String id) throws Exception {
+		Connection conn = dataSource.getConnection();
+		PreparedStatement sql = conn.prepareStatement("select email from employee where id = ?");
+		sql.setString(1, id);
+		ResultSet rs = sql.executeQuery();
+		try {
+			if (!rs.next()) {
+				throw new Exception("Could not find email for employee with id = " + id);
+			} else {
+				return rs.getString("email");
+			}
+		} finally {
+			sql.close();
+			conn.close();
+		}
+
+	}
+	
 	public Integer getEmployeeIdFromEmail(String email) throws Exception {
 		Connection conn = dataSource.getConnection();
 		PreparedStatement sql = conn.prepareStatement("select id from employee where email = ?");

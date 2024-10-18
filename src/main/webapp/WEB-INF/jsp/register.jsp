@@ -12,6 +12,10 @@
 	<body>
 		<jsp:include page="regNavPages.jsp" />
 		
+		<a href="welcome">
+			<img id=backArrow src = "img/backArrow.png">
+		</a>
+		
 		<h1 style="text-align: center">Register</h1>
 		
 		<div class="formContainer">
@@ -33,7 +37,7 @@
 				<input type="text" id="email" name="email" placeholder="Email address">
 				<input type="text" id="pwd" name="pwd" placeholder="Password">
 				<select id="isAdmin" name="isAdmin">
-  					<option value="" disabled selected>Are you an admin...</option>
+  					<option value="" disabled selected>Are You An Admin?</option>
   					<option value="y">Y</option>
   					<option value="n">N</option>
 				</select>
@@ -52,13 +56,6 @@
   					<option value="aws">AWS</option>
   					<option value="azure">Azure</option>
   					<option value="softSkills">Soft Skills</option>
-				</select>
-				
-				<select id="type2" name="type2">
-  					<option value="" disabled selected>Preferred Course Type...</option>
-  					<option value="AWS">AWS</option>
-  					<option value="Azure">Azure</option>
-  					<option value="Soft Skills">Soft Skills</option>
 				</select>
 				
 				<input type="submit" value="Submit">

@@ -38,6 +38,7 @@ function processResponse1() {
 		
 		for (i=0; i < namesSignUps.length; i++){
 			signUpData += namesSignUps[i].getAttribute("name");
+			signUpData += "<br>";
 		}
 		
 		document.getElementsByClassName("bookedPeeps")[0].innerHTML += signUpData;
@@ -57,6 +58,7 @@ function processResponse2() {
 		
 		for (i=0; i < namesInts.length; i++){
 			interestedData += namesInts[i].getAttribute("name");
+			interestedData += "<br>";
 		}
 		
 		document.getElementsByClassName("regIntPeeps")[0].innerHTML += interestedData;

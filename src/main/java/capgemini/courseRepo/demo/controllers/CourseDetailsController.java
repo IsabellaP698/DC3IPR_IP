@@ -56,20 +56,13 @@ public class CourseDetailsController {
 											  @RequestParam Map<String, String> formData, 
 											  @ModelAttribute("userSession") UserSession userSession, Model model) throws Exception {
 		
-		String email = formData.get("email");
+		
 		String courID = formData.get("cour_ID");
 		
-		String empId = String.valueOf(employeeService.getEmployeeIdFromEmail(email));
-		if(empId == null) {
-			List<String> errors = new ArrayList<>();
-			errors.add("No employee with this email");
-			model.addAttribute("errors", errors);
-			
-			if (userSession.isAdmin()) {
-				return "outerCourseDetailsAdmin";
-			} 
-			return "outerCourseDetails";
-		} 
+		String empId = String.valueOf(userSession.getEmployeeID());
+				
+		String email = String.valueOf(employeeService.getEmployeeEmailFromId(empId));
+		
 		
 		int integer = attendeeService.attendeeRegistersInterest(empId, courID);
 		if(integer == 0) {
@@ -99,13 +92,13 @@ public class CourseDetailsController {
 		}
 		
 		if (formData.get("pmEmail") != null) {
-			String pracEmail = formData.get("email");
-			emailService.sendApprovalEmail(pracEmail, "Someone needs your people manager approval",courseName, email );
+			String pmEmail = formData.get("email");
+			emailService.sendApprovalEmail(pmEmail, "Someone needs your people manager approval",courseName, email );
 		}
 		
 		if (formData.get("daEmail") != null) {
-			String pracEmail = formData.get("email");
-			emailService.sendApprovalEmail(pracEmail, "Someone needs your delivery area approval",courseName, email );
+			String daEmail = formData.get("email");
+			emailService.sendApprovalEmail(daEmail, "Someone needs your delivery area approval",courseName, email );
 		}
 		
 		
@@ -121,20 +114,11 @@ public class CourseDetailsController {
 											  @RequestParam Map<String, String> formData, 
 											  @ModelAttribute("userSession") UserSession userSession, Model model) throws Exception {
 		
-		String email = formData.get("email");
 		String courID = formData.get("cour_ID");
 		
-		String empId = String.valueOf(employeeService.getEmployeeIdFromEmail(email));
-		if(empId == null) {
-			List<String> errors = new ArrayList<>();
-			errors.add("No employee with this email");
-			model.addAttribute("errors", errors);
-			
-			if (userSession.isAdmin()) {
-				return "outerCourseDetailsAdmin";
-			} 
-			return "outerCourseDetails";
-		} 
+		String empId = String.valueOf(userSession.getEmployeeID());
+				
+		String email = String.valueOf(employeeService.getEmployeeEmailFromId(empId));
 		
 		int integer = attendeeService.attendeeSignsUp(empId, courID);
 		if(integer == 0) {
@@ -156,6 +140,22 @@ public class CourseDetailsController {
 		String organiserEmail = courseService.getOrganiserEmail(courID);
 		
 		emailService.sendSignUpEmail(organiserEmail, "New Sign Up",courseName );
+		
+		//send emails to approvers
+				if (formData.get("pracEmail") != null) {
+					String pracEmail = formData.get("email");
+					emailService.sendApprovalEmail(pracEmail, "Someone needs your practice approval",courseName, email );
+				}
+				
+				if (formData.get("pmEmail") != null) {
+					String pmEmail = formData.get("email");
+					emailService.sendApprovalEmail(pmEmail, "Someone needs your people manager approval",courseName, email );
+				}
+				
+				if (formData.get("daEmail") != null) {
+					String daEmail = formData.get("email");
+					emailService.sendApprovalEmail(daEmail, "Someone needs your delivery area approval",courseName, email );
+				}
 		
 		if (userSession.isAdmin()) {
 			return "coursesAdmin";

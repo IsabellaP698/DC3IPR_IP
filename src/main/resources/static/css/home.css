@@ -33,12 +33,11 @@ footer {
 .topnav-centered {
 	display: flex;
     align-items: center; /* Align items vertically */
-    justify-content: flex-start; /* Align items from start */
     justify-content: center; /* Center items horizontally */
+    flex-direction: column; 
 }
 
 .logo {
-    margin-right: 10px; /* Add margin between the logo and text */
     max-width: 25%;
   max-height: 25%;
 }
@@ -46,6 +45,7 @@ footer {
 .logo img {
     width: 400px; /* Set the width of the logo */
     height: auto; /* Let the height adjust proportionally */    
+    padding-top: 20px;
 }
 
 
@@ -53,6 +53,7 @@ footer {
   color: rgb(11, 91, 157);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 50px;
+  margin-top: 0;
   
 }
 
