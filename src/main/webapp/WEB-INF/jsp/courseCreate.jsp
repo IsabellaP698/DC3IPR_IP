@@ -49,7 +49,7 @@
 				<br>
 				
 				<label for="length">Course length (in days):</label>
-    			<input type="number" id="length" name="length" placeholder="Course Length...">
+    			<input type="number" id="length" name="length" min="1" max="30" placeholder="Course Length...">
 				 			
   				<label for="cert">Does this have a certification? :</label>
     			<select id="cert" name="cert">

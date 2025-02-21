@@ -42,6 +42,9 @@ public class EmailService {
 		message.setText(employeeEmail + " requires your approval for the " + courseName + " course! Please respond to them with your approval.");
 		message.setSubject(subject);
 		
+		System.out.println(toEmail+ subject+ courseName + employeeEmail);
+		System.out.println(message);
+		
 		mailSender.send(message);
 		
 		System.out.println("Mail sent....!");

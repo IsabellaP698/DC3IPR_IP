@@ -60,7 +60,10 @@ public class CourseDetailsController {
 		String courID = formData.get("cour_ID");
 		
 		String empId = String.valueOf(userSession.getEmployeeID());
-				
+		
+		System.out.println(userSession.getEmployeeID());
+		System.out.println(userSession.toString());
+		
 		String email = String.valueOf(employeeService.getEmployeeEmailFromId(empId));
 		
 		
@@ -87,17 +90,17 @@ public class CourseDetailsController {
 		
 		//send emails to approvers
 		if (formData.get("pracEmail") != null) {
-			String pracEmail = formData.get("email");
+			String pracEmail = formData.get("pracEmail");
 			emailService.sendApprovalEmail(pracEmail, "Someone needs your practice approval",courseName, email );
 		}
 		
 		if (formData.get("pmEmail") != null) {
-			String pmEmail = formData.get("email");
+			String pmEmail = formData.get("pmEmail");
 			emailService.sendApprovalEmail(pmEmail, "Someone needs your people manager approval",courseName, email );
 		}
 		
 		if (formData.get("daEmail") != null) {
-			String daEmail = formData.get("email");
+			String daEmail = formData.get("daEmail");
 			emailService.sendApprovalEmail(daEmail, "Someone needs your delivery area approval",courseName, email );
 		}
 		
@@ -117,6 +120,9 @@ public class CourseDetailsController {
 		String courID = formData.get("cour_ID");
 		
 		String empId = String.valueOf(userSession.getEmployeeID());
+		
+		System.out.println(userSession.getEmployeeID());
+		System.out.println(userSession.toString());
 				
 		String email = String.valueOf(employeeService.getEmployeeEmailFromId(empId));
 		
@@ -143,17 +149,17 @@ public class CourseDetailsController {
 		
 		//send emails to approvers
 				if (formData.get("pracEmail") != null) {
-					String pracEmail = formData.get("email");
+					String pracEmail = formData.get("pracEmail");
 					emailService.sendApprovalEmail(pracEmail, "Someone needs your practice approval",courseName, email );
 				}
 				
 				if (formData.get("pmEmail") != null) {
-					String pmEmail = formData.get("email");
+					String pmEmail = formData.get("pmEmail");
 					emailService.sendApprovalEmail(pmEmail, "Someone needs your people manager approval",courseName, email );
 				}
 				
 				if (formData.get("daEmail") != null) {
-					String daEmail = formData.get("email");
+					String daEmail = formData.get("daEmail");
 					emailService.sendApprovalEmail(daEmail, "Someone needs your delivery area approval",courseName, email );
 				}
 		

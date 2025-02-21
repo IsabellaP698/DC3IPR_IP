@@ -62,8 +62,8 @@
   					<div class="dropdown">
   					<button class="btn">Cert</button>
   					<div class="dropdown-content">
-    					<button onclick="filterSelection('cert')"> Cert</button>
-    					<button onclick="filterSelection('nocert')"> No Cert</button>
+    					<button onclick="filterSelection('Y')"> Cert</button>
+    					<button onclick="filterSelection('N')"> No Cert</button>
   					</div>
   					</div>
   					
